@@ -59,15 +59,17 @@ bot.on('message', async (msg) => {
         // await bot.sendSticker
         return bot.sendMessage(chatId, welcomeMessage, firstScreenBtnOptions)
     }
-    if (text === '/info') {
-        // return bot.sendSticker
-        return bot.sendMessage(chatId, 'Что-то на тестовом', firstScreenBtnOptions)
-    }
+    // if (text === '/info') {
+    //     // return bot.sendSticker
+    //     return bot.sendMessage(chatId, 'Что-то на тестовом', firstScreenBtnOptions)
+    // }
 
     // click on first screen btns
     switch (text) {
         case firstScreenKeyboardText.description:
-            return bot.sendDocument(chatId, descriptionDocumentToken)
+            bot.sendDocument(chatId, descriptionDocumentToken)
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')
+            break;
         case firstScreenKeyboardText.reviews:
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
         default:
@@ -77,14 +79,17 @@ bot.on('message', async (msg) => {
     // click on reviews btns
     switch (text) {
         case '2020':
-            return reviews2020.forEach(async i => {
-                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })    
+            reviews2020.forEach(async i => {
+                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
             })
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')
+            break;
         case '2021':
-            return reviews2021.forEach(async i => {
+            reviews2021.forEach(async i => {
                 await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })    
             })
-        
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')      
+            break;  
         case 'Назад': 
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
         default:
