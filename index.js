@@ -93,13 +93,17 @@ bot.on('message', async (msg) => {
 
     // click on reviews btns
     switch (text) {
+        case 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks':
+            break;
         case '2020':
             sendReviews(reviews2020).then(data => {
                 bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
             })
             break;
         case '2021':
-            sendReviews(reviews2021)
+            sendReviews(reviews2021).then(data => {
+                bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
+            })
             bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)      
             break;  
         case 'Назад': 
