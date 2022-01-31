@@ -68,7 +68,7 @@ bot.on('message', async (msg) => {
     switch (text) {
         case firstScreenKeyboardText.description:
             bot.sendDocument(chatId, descriptionDocumentToken)
-            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
             break;
         case firstScreenKeyboardText.reviews:
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
@@ -76,19 +76,21 @@ bot.on('message', async (msg) => {
             break;
     }
 
+    const sendReviews = async (array) => {
+        await array.forEach(async i => {
+            bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
+        })
+    }
+
     // click on reviews btns
     switch (text) {
         case '2020':
-            reviews2020.forEach(async i => {
-                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
-            })
-            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')
+            sendReviews(reviews2020)
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
             break;
         case '2021':
-            reviews2021.forEach(async i => {
-                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })    
-            })
-            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks')      
+            sendReviews(reviews2021)
+            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)      
             break;  
         case 'Назад': 
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
