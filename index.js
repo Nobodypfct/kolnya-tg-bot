@@ -20,10 +20,10 @@ server.listen(port, () => {
 
 const bot = new TelegramApi(token, { polling: true })
 
-// bot.setMyCommands([
-//     {command: '/start', description: 'Начальное приветствие'}, 
-//     {command: '/info', description: 'Получить какую-нибудь инфо'}
-// ])
+bot.setMyCommands([
+    {command: '/start', description: 'Старт'}, 
+    // {command: '/info', description: 'Получить какую-нибудь инфо'}
+])
 
 const firstScreenKeyboard = [
     [{text: firstScreenKeyboardText.description, callback_data: '1'}],
@@ -64,8 +64,8 @@ bot.on('message', async (msg) => {
     switch (text) {
         case firstScreenKeyboardText.description:
             await bot.sendDocument(chatId, descriptionDocumentToken)
-            await bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
-            break;
+            return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
+            
         case firstScreenKeyboardText.reviews:
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
         default:
@@ -85,16 +85,8 @@ bot.on('message', async (msg) => {
         return Promise.all(list.map(item => doSomethingAsync(item)))
     }
 
-    // const sendReviews = async (array) => {
-    //     await array.forEach(async i => {
-    //         bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
-    //     })
-    // }
-
     // click on reviews btns
     switch (text) {
-        case 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks':
-            return;
         case '2020':
             sendReviews(reviews2020).then(data => {
                 bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
@@ -103,8 +95,7 @@ bot.on('message', async (msg) => {
         case '2021':
             sendReviews(reviews2021).then(data => {
                 bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
-            })
-            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)      
+            })      
             break;  
         case 'Назад': 
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
