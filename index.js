@@ -5,6 +5,12 @@ const { reviews2021 } = require('./constants/reviewsData2021');
 
 const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
 
+const port = process.env.PORT || 8000;
+
+server.listen(port, () => {
+    console.log("App is running on port " + port);
+});
+
 const bot = new TelegramApi(token, { polling: true })
 
 // bot.setMyCommands([
