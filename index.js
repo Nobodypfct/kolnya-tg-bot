@@ -72,8 +72,8 @@ bot.on('message', async (msg) => {
             break;
     }
 
-    const functionThatReturnsAPromise = i => { //a function that returns a promise
-        bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
+    const functionThatReturnsAPromise = async i => { //a function that returns a promise
+        await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
         return Promise.resolve('ok')
     }
 
