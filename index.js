@@ -7,10 +7,10 @@ const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
 
 const bot = new TelegramApi(token, { polling: true })
 
-bot.setMyCommands([
-    {command: '/start', description: 'Начальное приветствие'}, 
-    {command: '/info', description: 'Получить какую-нибудь инфо'}
-])
+// bot.setMyCommands([
+//     {command: '/start', description: 'Начальное приветствие'}, 
+//     {command: '/info', description: 'Получить какую-нибудь инфо'}
+// ])
 
 const firstScreenKeyboard = [
     [{text: firstScreenKeyboardText.description, callback_data: '1'}],
