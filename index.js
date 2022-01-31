@@ -1,4 +1,5 @@
 const TelegramApi = require('node-telegram-bot-api'); 
+const http = require('http');
 const { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage } = require('./constants/constants');
 const { reviews2020 } = require('./constants/reviewsData2020');
 const { reviews2021 } = require('./constants/reviewsData2021');
@@ -6,6 +7,12 @@ const { reviews2021 } = require('./constants/reviewsData2021');
 const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
 
 const port = process.env.PORT || 8000;
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
+  });
 
 server.listen(port, () => {
     console.log("App is running on port " + port);
