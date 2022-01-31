@@ -1,8 +1,9 @@
 const TelegramApi = require('node-telegram-bot-api'); 
 const { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage } = require('./constants/constants');
 const { reviews2020 } = require('./constants/reviewsData2020');
+const { reviews2021 } = require('./constants/reviewsData2021');
 
-const token = '5074698681:AAFcOFIRL8HiGk774S9tPBeQ__Fat6GLuiw';
+const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
 
 const bot = new TelegramApi(token, { polling: true })
 
@@ -55,7 +56,7 @@ bot.on('message', async (msg) => {
         case firstScreenKeyboardText.description:
             return bot.sendDocument(chatId, descriptionDocumentToken)
         case firstScreenKeyboardText.reviews:
-            return bot.sendMessage(chatId, 'Testing videos with reviews should be here', reviewsBtnOptions)
+            return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
         default:
             break;
     }
@@ -63,16 +64,20 @@ bot.on('message', async (msg) => {
     // click on reviews btns
     switch (text) {
         case '2020':
-            return reviews2020.forEach(i => {
-                bot.sendVideo(chatId, i.token, { caption: i.caption, reply_markup: reviewsBtnOptions })    
+            return reviews2020.forEach(async i => {
+                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })    
+            })
+        case '2021':
+            return reviews2021.forEach(async i => {
+                await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })    
             })
         
         case 'Назад': 
-            return bot.sendMessage(chatId, 'Пожалуйста, выберите один из ответов:', firstScreenBtnOptions)
+            return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
         default:
             break;
     }
-    console.log('fuck', msg, msg.text)
+    console.log('msg', msg, msg.text)
 
     // if the user sent another message
     return bot.sendMessage(chatId, errorMessage)

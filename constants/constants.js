@@ -1,5 +1,5 @@
 // pdf file token with description
-const descriptionDocumentToken = 'BQACAgIAAxkBAAMkYd8xOGqRBl_vorkBjZYLpglPHhIAAo8UAAI5NfhKWRQxlxhxjv0jBA'; 
+const descriptionDocumentToken = 'BQACAgIAAxkBAANkYfgn7kJVj2NzxDoR4fbqNpBT_b4AAgsYAAJ-N8FLO_WhEZm7XzgjBA'; 
 
 const welcomeMessage = `Привет, друг👋🏼 
 Здесь ты можешь:
