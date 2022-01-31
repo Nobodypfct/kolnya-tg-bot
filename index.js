@@ -59,16 +59,12 @@ bot.on('message', async (msg) => {
         // await bot.sendSticker
         return bot.sendMessage(chatId, welcomeMessage, firstScreenBtnOptions)
     }
-    // if (text === '/info') {
-    //     // return bot.sendSticker
-    //     return bot.sendMessage(chatId, 'Что-то на тестовом', firstScreenBtnOptions)
-    // }
 
     // click on first screen btns
     switch (text) {
         case firstScreenKeyboardText.description:
-            bot.sendDocument(chatId, descriptionDocumentToken)
-            bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
+            await bot.sendDocument(chatId, descriptionDocumentToken)
+            await bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
             break;
         case firstScreenKeyboardText.reviews:
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
