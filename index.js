@@ -94,7 +94,7 @@ bot.on('message', async (msg) => {
     // click on reviews btns
     switch (text) {
         case 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks':
-            break;
+            return;
         case '2020':
             sendReviews(reviews2020).then(data => {
                 bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
