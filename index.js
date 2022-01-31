@@ -88,15 +88,13 @@ bot.on('message', async (msg) => {
     // click on reviews btns
     switch (text) {
         case '2020':
-            sendReviews(reviews2020).then(data => {
+            return sendReviews(reviews2020).then(data => {
                 return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
             })
-            break;
         case '2021':
-            sendReviews(reviews2021).then(data => {
+            return sendReviews(reviews2021).then(data => {
                 return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
             })      
-            break;  
         case 'Назад': 
             return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
         default:
