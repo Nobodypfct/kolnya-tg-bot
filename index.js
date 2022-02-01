@@ -36,20 +36,6 @@ const trackEvent = (category, action, label, value) => {
 const port = process.env.PORT || 8000;
 
 const server = http.createServer(async (req, res) => {
-    try {
-        await trackEvent(
-          'Pageview',
-          'Example action',
-          'Example label',
-          '100'
-        );
-        res.status(200).send('Event tracked.').end();
-      } catch (error) {
-        // This sample treats an event tracking error as a fatal error. Depending
-        // on your application's needs, failing to track an event may not be
-        // considered an error.
-        next(error);
-      }
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.end('Hello World');
