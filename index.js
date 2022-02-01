@@ -5,18 +5,11 @@ const { reviews2020 } = require('./constants/reviewsData2020');
 const { reviews2021 } = require('./constants/reviewsData2021');
 
 const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
-const gtag = 'G-P3DQWE7PMZ'
+// const gtag = 'G-P3DQWE7PMZ'
 
 const port = process.env.PORT || 8000;
 
 const server = http.createServer(async (req, res) => {
-    await fetch(`https://www.google-analytics.com/collect?v=1&t=event&tid=${gtag}&cid=555&dp=%2Fhome`,
-    {
-        headers: {
-          'user-agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
-        },
-    })
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.end('Hello World');
