@@ -5,11 +5,51 @@ const { reviews2020 } = require('./constants/reviewsData2020');
 const { reviews2021 } = require('./constants/reviewsData2021');
 
 const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
-// const gtag = 'G-P3DQWE7PMZ'
+const GA_TRACKING_ID = 'G-P3DQWE7PMZ'
+
+const trackEvent = (category, action, label, value) => {
+    const data = {
+      // API Version.
+      v: '1',
+      // Tracking ID / Property ID.
+      tid: GA_TRACKING_ID,
+      // Anonymous Client Identifier. Ideally, this should be a UUID that
+      // is associated with particular user, device, or browser instance.
+      cid: '555',
+      // Event hit type.
+      t: 'event',
+      // Event category.
+      ec: category,
+      // Event action.
+      ea: action,
+      // Event label.
+      el: label,
+      // Event value.
+      ev: value,
+    };
+  
+    return fetch('http://www.google-analytics.com/debug/collect', {
+      params: data,
+    });
+};
 
 const port = process.env.PORT || 8000;
 
 const server = http.createServer(async (req, res) => {
+    try {
+        await trackEvent(
+          'Pageview',
+          'Example action',
+          'Example label',
+          '100'
+        );
+        res.status(200).send('Event tracked.').end();
+      } catch (error) {
+        // This sample treats an event tracking error as a fatal error. Depending
+        // on your application's needs, failing to track an event may not be
+        // considered an error.
+        next(error);
+      }
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.end('Hello World');
@@ -101,6 +141,25 @@ bot.on('message', async (msg) => {
         default:
             break;
     }
+    try {
+        await trackEvent(
+          'Bot Messages',
+          'onMessage',
+          'Example label',
+          text
+        );
+      } catch (error) {
+        // This sample treats an event tracking error as a fatal error. Depending
+        // on your application's needs, failing to track an event may not be
+        // considered an error.
+        await trackEvent(
+            'Bot Errors',
+            'onMessage Error',
+            'Example label',
+            error
+          );
+        console.error(error);
+      }
     console.log('msg', msg, msg.text)
 
     // if the user sent another message
