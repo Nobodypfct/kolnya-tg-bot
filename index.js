@@ -4,8 +4,8 @@ const { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcom
 const { reviews2020 } = require('./constants/reviewsData2020');
 const { reviews2021 } = require('./constants/reviewsData2021');
 
-const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c';
-const GA_TRACKING_ID = 'G-P3DQWE7PMZ'
+// const token = '5121108812:AAFHWX6dUkS-06yvTcJcw0XqWA97f-aNB7c'; // kolnya_school_bot
+const token = '5123162187:AAHondwdhh8e7YAx_-2c-7YrJPAezk4mwI8'; //test bot
 
 const port = process.env.PORT || 8000;
 
