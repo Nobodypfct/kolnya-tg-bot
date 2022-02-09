@@ -1,10 +1,10 @@
 // pdf file token with description
-const descriptionDocumentToken = 'BQACAgIAAxkBAANkYfgn7kJVj2NzxDoR4fbqNpBT_b4AAgsYAAJ-N8FLO_WhEZm7XzgjBA'; 
+const descriptionDocumentToken = 'BQACAgIAAxkBAAIO-mID5Oc2zahpITGj1vzZ_dFvEpnlAAL3EgACf6sYSF5SArc6Tp9yIwQ'; 
 
 const welcomeMessage = `Привет, друг👋🏼 
 Здесь ты можешь:
-✅ узнать информацию о курсе
-✅ посмотреть отзывы от наших учеников`;
+✅ Узнать информацию о курсе
+✅ Посмотреть отзывы от наших учеников`;
 
 const errorMessage = 'Я тебя не понимаю, попробуй ещё раз';
 
@@ -14,7 +14,7 @@ const yearOfReviews = {
 }
 
 const firstScreenKeyboardText = {
-    description: 'Узнать подробности об обучении',
+    description: 'Информация о курсе',
     reviews: 'Отзывы учеников'
 }
 
