@@ -93,6 +93,30 @@ const reviews2021 = [
         '\n' +
         '👉🏼Инста Юли: tattooalekseevna'
     },
+    {
+        file_id: 'BAACAgIAAxkBAAI01mLqlKgUIeqQcjDH6184hJZCxf_WAAKXHQACfCtQS6C-r9pcDAhWKQQ',
+        caption: '🔥Отзыв Даниила из города Люберцы🛣' + '\n' + 'Как мастер-самоучка, Даня решил посетить наш курс, чтобы усовершенствовать свои навыки и повысить квалификацию📈\n' +
+        '\n' +
+        '👉🏼Инста Дани: darknezzz.tattoo'
+    },
+    {
+        file_id: 'BAACAgIAAxkBAAI1mmLqmBYyc_ycjU6hbIALnMES-AqiAAKwHQACfCtQSzNKAAHKUKzwsSkE',
+        caption: '🔥Отзыв Виктории из города Вологда🏡 Самая молодая ученица с декабрьского курса с немалыми амбициями❗\n' +
+        '\n' +
+        '👉🏼Инста Вики: ragaliks.tym_art'
+    },
+    {
+        file_id: 'BAACAgIAAxkBAAI1rmLqmWwqAbcrCIJ--3x_NeY_UxpmAAK1HQACfCtQSym_HdonxtSrKQQ',
+        caption: '🔥Отзыв Анастасии из города Москва🌇 Курс помог Насте определиться со стилистикой, в которой она продолжит работать в дальнейшем👍\n' +
+        '\n' +
+        '👉🏼Инста Насти: fyoldesh_tattoo'
+    },
+    {
+        file_id: 'BAACAgIAAxkBAAI162Lqmv1wO-BAjMSixgc2uNo1Kb3vAALAHQACfCtQS3WyuSCME2KvKQQ',
+        caption: '🔥Отзыв Али из города Нальчик🌃 \nАли приехал издалека с четкой целью обучиться именно в Кольне, и о своём решении ни разу не пожалел👌\n' +
+        '\n' +
+        '👉🏼Инста Али: ognemeeet.tattoo'
+    }
 ]
 
 module.exports = { reviews2021 };
