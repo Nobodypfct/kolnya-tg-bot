@@ -1,6 +1,7 @@
 const TelegramApi = require('node-telegram-bot-api'); 
 const http = require('http');
-const { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage } = require('./constants/constants');
+
+const { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage, commonEndMessage, chooseMessage } = require('./constants/constants');
 const { reviews2020 } = require('./constants/reviewsData2020');
 const { reviews2021 } = require('./constants/reviewsData2021');
 
@@ -23,9 +24,9 @@ const bot = new TelegramApi(token, { polling: true })
 
 bot.setMyCommands([
     {command: '/start', description: 'Старт'}, 
-    // {command: '/info', description: 'Получить какую-нибудь инфо'}
 ])
 
+// buttons for first screen
 const firstScreenKeyboard = [
     [{text: firstScreenKeyboardText.description, callback_data: '1'}],
     [{text: firstScreenKeyboardText.reviews, callback_data: '2'}],
@@ -38,6 +39,7 @@ const firstScreenBtnOptions = {
     }) 
 }
 
+// buttons for reviews
 const reviewsKeyboard = [
     [{text: '2020', callback_data: yearOfReviews.reviewsFrom2020}],
     [{text: '2021', callback_data: yearOfReviews.reviewsFrom2021}],
@@ -57,7 +59,6 @@ bot.on('message', async (msg) => {
 
     // commands
     if (text === '/start') {
-        // await bot.sendSticker
         return bot.sendMessage(chatId, welcomeMessage, firstScreenBtnOptions)
     }
 
@@ -65,45 +66,37 @@ bot.on('message', async (msg) => {
     switch (text) {
         case firstScreenKeyboardText.description:
             await bot.sendDocument(chatId, descriptionDocumentToken)
-            return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', firstScreenBtnOptions)
+            return bot.sendMessage(chatId, commonEndMessage, firstScreenBtnOptions)
             
         case firstScreenKeyboardText.reviews:
-            return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', reviewsBtnOptions)
+            return bot.sendMessage(chatId, chooseMessage, reviewsBtnOptions)
         default:
             break;
     }
 
-    const functionThatReturnsAPromise = async i => { //a function that returns a promise
-        await bot.sendVideo(chatId, i.file_id, { caption: i.caption, reply_markup: reviewsBtnOptions })
-        return Promise.resolve('ok')
-    }
-
-    const doSomethingAsync = async item => {
-        return functionThatReturnsAPromise(item)
-    }
-
-    const sendReviews = async (list) => {
-        return Promise.all(list.map(item => doSomethingAsync(item)))
+    const sendReviews = (list) => {
+        // TODO: figure out in asynchrony and send reviews in sequential order
+        return Promise.all(list.map(async item => {
+            await bot.sendVideo(chatId, item.file_id, { caption: item.caption, reply_markup: reviewsBtnOptions })
+        }))
     }
 
     // click on reviews btns
     switch (text) {
         case '2020':
-            return sendReviews(reviews2020).then(data => {
-                return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
+            return sendReviews(reviews2020).then(() => {
+                return bot.sendMessage(chatId, commonEndMessage, reviewsBtnOptions)
             })
         case '2021':
-            return sendReviews(reviews2021).then(data => {
-                return bot.sendMessage(chatId, 'Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks', reviewsBtnOptions)
+            return sendReviews(reviews2021).then(() => {
+                return bot.sendMessage(chatId, commonEndMessage, reviewsBtnOptions)
             })      
         case 'Назад': 
-            return bot.sendMessage(chatId, 'Пожалуйста, выберите один из вариантов:', firstScreenBtnOptions)
+            return bot.sendMessage(chatId, chooseMessage, firstScreenBtnOptions)
         default:
             break;
     }
-    
-    console.log('msg', msg, msg.text)
 
-    // if the user sent another message
+    // if the user sent another (unknown) message
     return bot.sendMessage(chatId, errorMessage)
 })

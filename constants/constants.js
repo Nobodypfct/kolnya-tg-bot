@@ -1,5 +1,5 @@
 // pdf file token with description
-const descriptionDocumentToken = 'BQACAgIAAxkBAAI0q2LqkweAjurnUgaajitEaIy8dOEzAAKLHQACfCtQS5OZxaQQ1ZrMKQQ'; //file_id
+const descriptionDocumentToken = 'BQACAgIAAxkBAAI0q2LqkweAjurnUgaajitEaIy8dOEzAAKLHQACfCtQS5OZxaQQ1ZrMKQQ'; // description file_id
 
 const welcomeMessage = `Привет, друг👋🏼 
 Здесь ты можешь:
@@ -7,6 +7,10 @@ const welcomeMessage = `Привет, друг👋🏼
 ✅ Посмотреть отзывы от наших учеников`;
 
 const errorMessage = 'Я тебя не понимаю, попробуй ещё раз';
+
+const commonEndMessage = `Задать вопросы или записаться на курс 👉🏼 @hvatiit_maks`;
+
+const chooseMessage = `Пожалуйста, выберите один из вариантов:`
 
 const yearOfReviews = {
     reviewsFrom2020: '2020_data',
@@ -18,4 +22,4 @@ const firstScreenKeyboardText = {
     reviews: 'Отзывы учеников'
 }
 
-module.exports = { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage };
+module.exports = { yearOfReviews, firstScreenKeyboardText, descriptionDocumentToken, welcomeMessage, errorMessage, commonEndMessage, chooseMessage };
